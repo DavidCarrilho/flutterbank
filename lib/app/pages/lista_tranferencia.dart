@@ -15,11 +15,7 @@ class ListaTransferencia extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(
-        children: <Widget>[
-          ItemTransferencia(Transferencia(100.00, 12345)),
-          ItemTransferencia(Transferencia(100.00, 12345)),
-          ItemTransferencia(Transferencia(100.00, 12345)),
-        ],
+        children: <Widget>[],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

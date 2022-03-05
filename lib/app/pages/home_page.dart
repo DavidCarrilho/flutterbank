@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:developer' as developer;
+
+import 'package:simplebank/app/models/models.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
@@ -12,7 +15,9 @@ class HomePage extends StatelessWidget {
 }
 
 class FormularioTranferencia extends StatelessWidget {
-  const FormularioTranferencia({Key key}) : super(key: key);
+  final TextEditingController _controladorCampoNumeroConta =
+      TextEditingController();
+  final TextEditingController _controladorCampoValor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +30,7 @@ class FormularioTranferencia extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              controller: _controladorCampoNumeroConta,
               style: TextStyle(fontSize: 24.0),
               decoration: InputDecoration(
                   labelText: 'Número da conta',
@@ -36,6 +42,7 @@ class FormularioTranferencia extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              controller: _controladorCampoValor,
               style: TextStyle(fontSize: 24.0),
               decoration: InputDecoration(
                   labelText: 'Valor',
@@ -45,7 +52,21 @@ class FormularioTranferencia extends StatelessWidget {
             ),
           ),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              developer
+                  .log('Numero da conta ${_controladorCampoNumeroConta.text}');
+              final int numeroConta =
+                  int.tryParse(_controladorCampoNumeroConta.text);
+              final double valor =
+                  double.tryParse(_controladorCampoNumeroConta.text);
+              if (numeroConta != null && valor != null) {
+                final transferenciaCriada = Transferencia(
+                  numeroConta,
+                  valor,
+                );
+                developer.log('$transferenciaCriada');
+              }
+            },
             child: Text('Confirmar'),
           )
         ],
