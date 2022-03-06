@@ -5,9 +5,7 @@ import 'package:simplebank/app/pages/pages.dart';
 import 'dart:developer' as developer;
 
 class ListaTransferencia extends StatelessWidget {
-  const ListaTransferencia({
-    Key key,
-  }) : super(key: key);
+  final List<Transferencia> _transferencia = [];
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +14,13 @@ class ListaTransferencia extends StatelessWidget {
         title: Text('Trnsferências'),
         centerTitle: true,
       ),
-      body: Column(
-        children: <Widget>[
-          
-        ],
+      body: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: _transferencia.length,
+        itemBuilder: (context, index) {
+          final transferencia = _transferencia[index];
+          return ItemTransferencia(transferencia);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -29,6 +30,7 @@ class ListaTransferencia extends StatelessWidget {
           }));
           future.then((transferenciaRecebida) {
             developer.log('$transferenciaRecebida');
+            _transferencia.add(transferenciaRecebida);
           });
         },
         child: Icon(Icons.add),
