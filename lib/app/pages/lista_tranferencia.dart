@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:simplebank/app/components/components.dart';
 import 'package:simplebank/app/models/models.dart';
-import 'package:simplebank/app/pages/pages.dart';
 import 'dart:developer' as developer;
 
-class ListaTransferencia extends StatelessWidget {
+class ListaTransferencia extends StatefulWidget {
+  @override
+  _ListaTransferenciaState createState() => _ListaTransferenciaState();
+}
+
+class _ListaTransferenciaState extends State<ListaTransferencia> {
   final List<Transferencia> _transferencia = [];
 
   @override
@@ -29,8 +33,10 @@ class ListaTransferencia extends StatelessWidget {
             return FormularioTranferencia();
           }));
           future.then((transferenciaRecebida) {
-            developer.log('$transferenciaRecebida');
-            _transferencia.add(transferenciaRecebida);
+            if (transferenciaRecebida != null) {
+              developer.log('$transferenciaRecebida');
+              _transferencia.add(transferenciaRecebida);
+            }
           });
         },
         child: Icon(Icons.add),
