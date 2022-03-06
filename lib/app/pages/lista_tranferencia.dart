@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simplebank/app/components/components.dart';
 import 'package:simplebank/app/models/models.dart';
+import 'package:simplebank/app/pages/pages.dart';
+import 'dart:developer' as developer;
 
 class ListaTransferencia extends StatelessWidget {
   const ListaTransferencia({
@@ -15,10 +17,20 @@ class ListaTransferencia extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          final Future<Transferencia> future =
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return FormularioTranferencia();
+          }));
+          future.then((transferenciaRecebida) {
+            developer.log('$transferenciaRecebida');
+          });
+        },
         child: Icon(Icons.add),
       ),
     );

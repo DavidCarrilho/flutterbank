@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simplebank/app/pages/lista_tranferencia.dart';
 import 'package:simplebank/app/pages/pages.dart';
 
 class AppWidget extends StatelessWidget {
@@ -7,7 +8,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: 'SimpleBank',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomePage(),
+      home: ListaTransferencia(),
     );
   }
 }

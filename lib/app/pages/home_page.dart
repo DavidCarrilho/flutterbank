@@ -40,7 +40,7 @@ class FormularioTranferencia extends StatelessWidget {
             icon: Icons.monetization_on,
           ),
           RaisedButton(
-            onPressed: () => _criaTransferencia(),
+            onPressed: () => _criaTransferencia(context),
             child: Text('Confirmar'),
           )
         ],
@@ -48,15 +48,14 @@ class FormularioTranferencia extends StatelessWidget {
     );
   }
 
-  void _criaTransferencia() {
+  void _criaTransferencia(BuildContext context) {
     final int numeroConta = int?.tryParse(_controladorCampoNumeroConta.text);
     final double valor = double?.tryParse(_controladorCampoValor.text);
     if (numeroConta != null && valor != null) {
-      final transferenciaCriada = Transferencia(
-        numeroConta,
-        valor,
-      );
+      final transferenciaCriada = Transferencia(numeroConta, valor);
+      developer.log('Criando transferencia');
       developer.log('$transferenciaCriada');
+      Navigator.pop(context, transferenciaCriada);
     }
   }
 }
