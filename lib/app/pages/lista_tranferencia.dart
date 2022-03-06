@@ -4,13 +4,13 @@ import 'package:simplebank/app/models/models.dart';
 import 'dart:developer' as developer;
 
 class ListaTransferencia extends StatefulWidget {
+  final List<Transferencia> _transferencia = [];
+
   @override
   _ListaTransferenciaState createState() => _ListaTransferenciaState();
 }
 
 class _ListaTransferenciaState extends State<ListaTransferencia> {
-  final List<Transferencia> _transferencia = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +20,9 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
       ),
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: _transferencia.length,
+        itemCount: widget._transferencia.length,
         itemBuilder: (context, index) {
-          final transferencia = _transferencia[index];
+          final transferencia = widget._transferencia[index];
           return ItemTransferencia(transferencia);
         },
       ),
@@ -33,10 +33,14 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
             return FormularioTranferencia();
           }));
           future.then((transferenciaRecebida) {
-            if (transferenciaRecebida != null) {
+            Future.delayed(Duration(seconds: 1), () {
               developer.log('$transferenciaRecebida');
-              _transferencia.add(transferenciaRecebida);
-            }
+              if (transferenciaRecebida != null) {
+                setState(() {
+                  widget._transferencia.add(transferenciaRecebida);
+                });
+              }
+            });
           });
         },
         child: Icon(Icons.add),
