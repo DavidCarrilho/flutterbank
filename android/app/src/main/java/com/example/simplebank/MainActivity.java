@@ -1,4 +1,4 @@
-package com.example.simplebank;
+package com.example.flutterbank;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

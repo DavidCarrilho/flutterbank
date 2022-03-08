@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:simplebank/app/models/models.dart';
+import 'package:flutterbank/app/models/models.dart';
 
 class ItemTransferencia extends StatelessWidget {
   final Transferencia _transferencia;

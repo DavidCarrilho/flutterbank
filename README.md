@@ -1,4 +1,4 @@
-# simplebank
+# flutterbank
 
 A new Flutter project.
 

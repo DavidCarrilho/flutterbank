@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simplebank/app/components/components.dart';
+import 'package:flutterbank/app/components/components.dart';
 
-import 'package:simplebank/app/models/models.dart';
+import 'package:flutterbank/app/models/models.dart';
 
 const _tituloApp = "Transferir";
 const _rotulo = "Valor";

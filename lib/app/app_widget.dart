@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:simplebank/app/pages/pages.dart';
+import 'package:flutterbank/app/pages/pages.dart';
 
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SimpleBank',
+      title: 'flutterbank',
       theme: ThemeData(
         primaryColor: Colors.green[900],
         accentColor: Colors.blueAccent[700],

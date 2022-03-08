@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simplebank/app/pages/lista_tranferencia.dart';
+import 'package:flutterbank/app/pages/lista_tranferencia.dart';
 
 const _tituloApp = 'Trnsferências';
 
