@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbank/app/design_system/colors/colors.dart';
+import 'package:flutterbank/app/pages/pages.dart';
 
 const _tituloApp = 'Trnsferências';
 
@@ -43,20 +44,27 @@ class DashboardPage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              height: 100.0,
-              width: 120.0,
+            Material(
               color: Theme.of(context).primaryColor,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.person, size: 30.0, color: kColorNeutralPurple),
-                  const SizedBox(height: 10.0),
-                  Text(
-                    'Contatos',
-                    style: TextStyle(color: kColorNeutralPurple),
+              child: InkWell(
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ContactList())),
+                child: Container(
+                  height: 100.0,
+                  width: 120.0,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.person,
+                          size: 30.0, color: kColorNeutralPurple),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        'Contatos',
+                        style: TextStyle(color: kColorNeutralPurple),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             )
           ],
