@@ -3,11 +3,11 @@ import 'package:flutterbank/app/components/components.dart';
 
 import 'package:flutterbank/app/models/models.dart';
 
-const _appTitle = "Nova Transferência";
-const _label = "Valor";
-const _valueFieldHint = "0.00";
-const _numberCountFieldLabel = "Número da conta";
-const _numberCountFieldHint = "0000";
+const _appTitle = "Nova contato";
+const _fullNameFieldLabel = "Nome completo";
+const _fullNameFieldHint = "Nome completo";
+const _numberAccountFieldLabel = "Número da conta";
+const _numberAccountFieldHint = "1234";
 const _confirmationButtonText = "Confirmar";
 
 class ContactForm extends StatefulWidget {
@@ -16,10 +16,9 @@ class ContactForm extends StatefulWidget {
 }
 
 class _ContactFormState extends State<ContactForm> {
-  final TextEditingController _countNumberController =
+  final TextEditingController _accountNumberController =
       TextEditingController();
-
-  final TextEditingController _valueFieldController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,33 +32,32 @@ class _ContactFormState extends State<ContactForm> {
         child: Column(
           children: <Widget>[
             CustomField(
-              controller: _countNumberController,
-              hint: _numberCountFieldHint,
-              icon: Icons.account_balance_wallet,
-              label: _numberCountFieldLabel,
-            ),
-            CustomField(
-              controller: _valueFieldController,
-              label: _label,
-              hint: _valueFieldHint,
+              controller: _nameController,
+              label: _fullNameFieldLabel,
+              hint: _fullNameFieldHint,
               icon: Icons.monetization_on,
             ),
+            CustomField(
+              controller: _accountNumberController,
+              label: _numberAccountFieldLabel,
+              hint: _numberAccountFieldHint,
+              icon: Icons.account_balance_wallet,
+            ),
             RaisedButton(
-              onPressed: () => _createTransaction(context),
+              onPressed: () {
+                final String name = _nameController.text;
+                final int accountNumer = int.tryParse(_accountNumberController.text);
+                final Contact newContact = Contact(
+                  name: name,
+                  accountNumber: accountNumer,
+                );
+                Navigator.pop(context, newContact);
+              },
               child: Text(_confirmationButtonText),
             )
           ],
         ),
       ),
     );
-  }
-
-  void _createTransaction(BuildContext context) {
-    final int countNumber = int?.tryParse(_countNumberController.text);
-    final double value = double?.tryParse(_valueFieldController.text);
-    if (countNumber != null && value != null) {
-      final createdTransaction = Transferencia(countNumber, value);
-      Navigator.pop(context, createdTransaction);
-    }
   }
 }
