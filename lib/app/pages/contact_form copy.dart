@@ -17,7 +17,6 @@ class ContactForm extends StatefulWidget {
 
 class _ContactFormState extends State<ContactForm> {
   final TextEditingController _countNumberController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _valueFieldController = TextEditingController();
 
   @override
