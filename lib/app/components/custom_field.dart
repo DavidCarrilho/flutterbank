@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Editor extends StatelessWidget {
+class CustomField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
-  final dica;
+  final hint;
   final IconData icon;
 
-  const Editor({
+  const CustomField({
     this.controller,
     this.label,
-    this.dica,
+    this.hint,
     this.icon,
   });
 
@@ -22,7 +22,7 @@ class Editor extends StatelessWidget {
         style: TextStyle(fontSize: 24.0),
         decoration: InputDecoration(
           labelText: label,
-          hintText: dica,
+          hintText: hint,
           icon: Icon(icon),
         ),
         keyboardType: TextInputType.number,
