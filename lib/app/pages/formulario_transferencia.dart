@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:simplebank/app/components/components.dart';
-import 'dart:developer' as developer;
 
 import 'package:simplebank/app/models/models.dart';
+
+const _tituloApp = "Transferir";
+const _rotulo = "Valor";
+const _dicaCampoValor = "0.00";
+const _rotuloCampoNumeroConta = "Número da conta";
+const _dicaCampoNumeroConta = "0000";
+const _textoBotaoConfirmar = "Confirmar";
 
 class FormularioTranferencia extends StatefulWidget {
   @override
@@ -19,7 +25,8 @@ class _FormularioTranferenciaState extends State<FormularioTranferencia> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("data"),
+        title: Text(_tituloApp),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -27,19 +34,19 @@ class _FormularioTranferenciaState extends State<FormularioTranferencia> {
           children: <Widget>[
             Editor(
               controller: _controladorCampoNumeroConta,
-              dica: '0000',
+              dica: _dicaCampoNumeroConta,
               icon: Icons.account_balance_wallet,
-              label: 'Número da conta',
+              label: _rotuloCampoNumeroConta,
             ),
             Editor(
               controller: _controladorCampoValor,
-              label: 'Valor',
-              dica: '00,00',
+              label: _rotulo,
+              dica: _dicaCampoValor,
               icon: Icons.monetization_on,
             ),
             RaisedButton(
               onPressed: () => _criaTransferencia(context),
-              child: Text('Confirmar'),
+              child: Text(_textoBotaoConfirmar),
             )
           ],
         ),
@@ -52,8 +59,6 @@ class _FormularioTranferenciaState extends State<FormularioTranferencia> {
     final double valor = double?.tryParse(_controladorCampoValor.text);
     if (numeroConta != null && valor != null) {
       final transferenciaCriada = Transferencia(numeroConta, valor);
-      developer.log('Criando transferencia');
-      developer.log('$transferenciaCriada');
       Navigator.pop(context, transferenciaCriada);
     }
   }

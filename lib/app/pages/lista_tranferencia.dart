@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simplebank/app/components/components.dart';
 import 'package:simplebank/app/models/models.dart';
-import 'dart:developer' as developer;
+
 
 class ListaTransferencia extends StatefulWidget {
   final List<Transferencia> _transferencia = [];
@@ -14,10 +14,7 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Trnsferências'),
-        centerTitle: true,
-      ),
+
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: widget._transferencia.length,
@@ -27,24 +24,23 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final Future<Transferencia> future =
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FormularioTranferencia();
-          }));
-          future.then((transferenciaRecebida) {
-            Future.delayed(Duration(seconds: 1), () {
-              developer.log('$transferenciaRecebida');
-              if (transferenciaRecebida != null) {
-                setState(() {
-                  widget._transferencia.add(transferenciaRecebida);
-                });
-              }
-            });
-          });
-        },
         child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return FormularioTranferencia();
+          })).then(
+            (transferenciaRecebida) => _atualiza(transferenciaRecebida),
+          );
+        },
       ),
     );
+  }
+
+  void _atualiza(Transferencia transferenciaRecebida) {
+    if (transferenciaRecebida != null) {
+      setState(() {
+        widget._transferencia.add(transferenciaRecebida);
+      });
+    }
   }
 }
