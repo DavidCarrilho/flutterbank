@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../design_system/colors/colors.dart';
 import 'pages.dart';
 
-const _tituloApp = 'Trnsferências';
+const _appTitle = 'Trnsferências';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({
@@ -13,7 +13,7 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tituloApp),
+        title: Text(_appTitle),
         centerTitle: true,
       ),
       body: Container(
