@@ -48,6 +48,7 @@ class _ContactFormState extends State<ContactForm> {
                 final String name = _nameController.text;
                 final int accountNumer = int.tryParse(_accountNumberController.text);
                 final Contact newContact = Contact(
+                  id: 0,
                   name: name,
                   accountNumber: accountNumer,
                 );
