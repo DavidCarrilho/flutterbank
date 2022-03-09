@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/design_system/colors/colors.dart';
-import 'package:flutterbank/app/pages/pages.dart';
+import '../design_system/colors/colors.dart';
+import 'pages.dart';
 
 const _tituloApp = 'Trnsferências';
 

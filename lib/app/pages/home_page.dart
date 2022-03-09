@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutterbank/app/pages/pages.dart';
+
+import 'pages.dart';
 
 
 class HomePage extends StatelessWidget {

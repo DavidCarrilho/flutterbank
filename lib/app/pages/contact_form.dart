@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/components/components.dart';
 
-import 'package:flutterbank/app/models/models.dart';
+import '../components/components.dart';
+import '../models/models.dart';
 
 const _appTitle = "Nova contato";
 const _fullNameFieldLabel = "Nome completo";

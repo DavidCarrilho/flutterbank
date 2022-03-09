@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutterbank/app/pages/pages.dart';
 import 'dart:developer' as developer;
+
+import 'package:flutter/material.dart';
+
+import 'pages.dart';
 
 class ContactList extends StatelessWidget {
   const ContactList({Key key}) : super(key: key);

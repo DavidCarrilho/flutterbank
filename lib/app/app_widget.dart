@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/pages/pages.dart';
 
 import 'design_system/colors/colors.dart';
+import 'pages/pages.dart';
 
 class AppWidget extends StatelessWidget {
   @override

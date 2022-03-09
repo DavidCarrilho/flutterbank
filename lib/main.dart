@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutterbank/app/app_widget.dart';
-import 'package:flutterbank/app/models/models.dart';
-import 'package:flutterbank/db/app_db.dart';
 import 'dart:developer' as developer;
+
+import 'package:flutter/material.dart';
+
+import 'app/app_widget.dart';
+import 'db/app_db.dart';
 
 void main() {
   runApp(AppWidget());

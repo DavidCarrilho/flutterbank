@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/components/components.dart';
 
-import 'package:flutterbank/app/models/models.dart';
+import '../components/components.dart';
+import '../models/models.dart';
 
 const _appTitle = "Nova transferência";
 const _label = "Valor";
@@ -51,21 +51,28 @@ class _ContactFormState extends State<ContactForm> {
       ),
     );
   }
+
   void _createContac(BuildContext context) {
-    final int countNumber = int?.tryParse(_countNumberController.text);
+    final int accountNumber = int?.tryParse(_countNumberController.text);
     final double value = double?.tryParse(_valueFieldController.text);
-    if (countNumber != null && value != null) {
-      final createdTransaction = Transferencia(countNumber, value);
-      Navigator.pop(context, createdTransaction);
-    }
-  }
-  void _createTransaction(BuildContext context) {
-    final int countNumber = int?.tryParse(_countNumberController.text);
-    final double value = double?.tryParse(_valueFieldController.text);
-    if (countNumber != null && value != null) {
-      final createdTransaction = Transferencia(countNumber, value);
+    if (accountNumber != null && value != null) {
+      final createdTransaction = Transaction(
+        accountNumber: accountNumber,
+        value: value,
+      );
       Navigator.pop(context, createdTransaction);
     }
   }
 
+  void _createTransaction(BuildContext context) {
+    final int accountNumber = int?.tryParse(_countNumberController.text);
+    final double value = double?.tryParse(_valueFieldController.text);
+    if (accountNumber != null && value != null) {
+      final createdTransaction = Transaction(
+        accountNumber: accountNumber,
+        value: value,
+      );
+      Navigator.pop(context, createdTransaction);
+    }
+  }
 }
