@@ -1,34 +1,30 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:flutterbank/app/models/models.dart';
 
 import 'pages.dart';
 
+const _appTitle = 'Contatos';
+
 class ContactList extends StatelessWidget {
-  const ContactList({Key key}) : super(key: key);
+  final List<Contact> contacts = [];
 
   @override
   Widget build(BuildContext context) {
+    // contacts.add(Contact(id: 0, name: 'David', accountNumber: 1234));
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contatos'),
+        title: Text(_appTitle),
         centerTitle: true,
       ),
-      body: Column(
-        children: <Widget>[
-          Card(
-            child: ListTile(
-              title: Text(
-                'David',
-                style: TextStyle(fontSize: 24.0),
-              ),
-              subtitle: Text(
-                '1234',
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-          )
-        ],
+      body: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+          final Contact contact = contacts[index];
+          return ContactWidget(contact: contact);
+        },
+        itemCount: contacts.length,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -43,6 +39,27 @@ class ContactList extends StatelessWidget {
               );
         },
         child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class ContactWidget extends StatelessWidget {
+  final Contact contact;
+
+  const ContactWidget({Key key, this.contact}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        title: Text(
+          contact.name,
+          style: TextStyle(fontSize: 24.0),
+        ),
+        subtitle: Text(
+          contact.accountNumber.toString(),
+          style: TextStyle(fontSize: 16.0),
+        ),
       ),
     );
   }
