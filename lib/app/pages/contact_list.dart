@@ -8,8 +8,6 @@ import 'pages.dart';
 const _appTitle = 'Contatos';
 
 class ContactList extends StatefulWidget {
-  // final List<Contact> contacts = [];
-
   @override
   _ContactListState createState() => _ContactListState();
 }
@@ -19,7 +17,6 @@ class _ContactListState extends State<ContactList> {
 
   @override
   Widget build(BuildContext context) {
-    // contacts.add(Contact(id: 0, name: 'David', accountNumber: 1234));
     return Scaffold(
       appBar: AppBar(
         title: Text(_appTitle),

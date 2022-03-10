@@ -17,8 +17,7 @@ class ContactForm extends StatefulWidget {
 }
 
 class _ContactFormState extends State<ContactForm> {
-  final TextEditingController _accountNumberController =
-      TextEditingController();
+  final TextEditingController _accountNumberController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final ContactDao _dao = ContactDao();
   @override
