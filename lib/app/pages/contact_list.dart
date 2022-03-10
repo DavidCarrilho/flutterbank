@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 import 'package:flutterbank/app/design_system/colors/colors.dart';
 import 'package:flutterbank/app/models/models.dart';
@@ -9,9 +7,14 @@ import 'pages.dart';
 
 const _appTitle = 'Contatos';
 
-class ContactList extends StatelessWidget {
+class ContactList extends StatefulWidget {
   // final List<Contact> contacts = [];
 
+  @override
+  _ContactListState createState() => _ContactListState();
+}
+
+class _ContactListState extends State<ContactList> {
   @override
   Widget build(BuildContext context) {
     // contacts.add(Contact(id: 0, name: 'David', accountNumber: 1234));
@@ -61,9 +64,15 @@ class ContactList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          return Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => ContactForm()),
-          );
+          return Navigator.of(context)
+              .push(
+                MaterialPageRoute(
+                  builder: (context) => ContactForm(),
+                ),
+              )
+              .then(
+                (value) => setState(() {}),
+              );
         },
         child: const Icon(Icons.add),
       ),
