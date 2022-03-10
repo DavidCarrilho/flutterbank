@@ -5,21 +5,25 @@ import 'package:sqflite/sqflite.dart';
 Future<Database> createDataBase() {
   return getDatabasesPath().then((dbPath) {
     final String path = join(dbPath, 'flutterbank.db');
-    return openDatabase(path,
-        onCreate: (db, version) {
-          db.execute('CREATE TABLE contacts('
-              'id INTEGER PRIMARY KEY, '
-              'name TEXT, '
-              'account_number INTEGER)');
-        },
-        version: 1,
-        onUpgrade: (db, oldVersion, newVersion) {
-          // run sql code for upgrade
-        });
+    return openDatabase(
+      path,
+      onCreate: (db, version) {
+        db.execute('CREATE TABLE contacts('
+            'id INTEGER PRIMARY KEY, '
+            'name TEXT, '
+            'account_number INTEGER)');
+      },
+      version: 1,
+      /// clear db
+      // onDowngrade: onDatabaseDowngradeDelete,
+    );
+    // onUpgrade: (db, oldVersion, newVersion) {
+    //   // run sql code for upgrade
+    // });
   });
 }
 
-Future<int> saveContact(Contact contact) {
+Future<int> saveContact({Contact contact}) {
   return createDataBase().then((db) {
     final Map<String, dynamic> contactMap = Map();
     contactMap['name'] = contact.name;

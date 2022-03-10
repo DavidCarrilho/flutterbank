@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbank/db/app_db.dart';
 
 import '../components/components.dart';
 import '../models/models.dart';
@@ -46,13 +47,15 @@ class _ContactFormState extends State<ContactForm> {
             RaisedButton(
               onPressed: () {
                 final String name = _nameController.text;
-                final int accountNumer = int.tryParse(_accountNumberController.text);
+                final int accountNumer =
+                    int.tryParse(_accountNumberController.text);
                 final Contact newContact = Contact(
                   id: 0,
                   name: name,
                   accountNumber: accountNumer,
                 );
-                Navigator.pop(context, newContact);
+                saveContact(contact: newContact)
+                    .then((id) => Navigator.pop(context));
               },
               child: Text(_confirmationButtonText),
             )
