@@ -19,14 +19,18 @@ class ContactList extends StatelessWidget {
         title: Text(_appTitle),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: findAll(),
+      body: FutureBuilder<List<Contact>>(
+        initialData: [],
+        future: Future.delayed(Duration(seconds: 1)).then((value) => findAll()),
         builder: (context, snapshot) {
-          final List<Contact> contacts = snapshot.data as List<Contact>;
+          final List<Contact> contacts = snapshot.data;
           return ListView.builder(
+            physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               final Contact contact = contacts[index];
-              return ContactWidget(contact: contact,);
+              return ContactWidget(
+                contact: contact,
+              );
             },
             itemCount: contacts.length,
           );
