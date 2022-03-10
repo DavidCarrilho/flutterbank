@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/db/app_db.dart';
 
+import '../../db/dao/contact_dao.dart';
 import '../components/components.dart';
 import '../models/models.dart';
 
@@ -20,7 +20,7 @@ class _ContactFormState extends State<ContactForm> {
   final TextEditingController _accountNumberController =
       TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-
+  final ContactDao _dao = ContactDao();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +54,7 @@ class _ContactFormState extends State<ContactForm> {
                   name: name,
                   accountNumber: accountNumer,
                 );
-                saveContact(contact: newContact)
+                _dao.saveContact(contact: newContact)
                     .then((id) => Navigator.pop(context));
               },
               child: Text(_confirmationButtonText),
