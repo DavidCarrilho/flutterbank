@@ -6,12 +6,4 @@ import 'app/app_widget.dart';
 import 'app/models/models.dart';
 import 'db/app_db.dart';
 
-void main() {
-  runApp(AppWidget());
-  // saveContact(Contact(id: 0, name: 'David', accountNumber: 12345));
-  // saveContact(Contact(id: 0, name: 'David', accountNumber: 1234)).then((id) {
-  findAll().then((contacts) {
-    developer.log(contacts.toString());
-  });
-  // });
-}
+void main() => runApp(AppWidget());

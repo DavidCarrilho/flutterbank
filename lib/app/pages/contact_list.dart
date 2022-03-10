@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/design_system/colors/colors.dart';
-import 'package:flutterbank/app/models/models.dart';
-import 'package:flutterbank/db/app_db.dart';
 
+import '../../db/dao/contact_dao.dart';
+import '../design_system/colors/colors.dart';
+import '../models/models.dart';
 import 'pages.dart';
 
 const _appTitle = 'Contatos';
@@ -15,6 +15,8 @@ class ContactList extends StatefulWidget {
 }
 
 class _ContactListState extends State<ContactList> {
+  final ContactDao _dao = ContactDao();
+
   @override
   Widget build(BuildContext context) {
     // contacts.add(Contact(id: 0, name: 'David', accountNumber: 1234));
@@ -25,7 +27,7 @@ class _ContactListState extends State<ContactList> {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: [],
-        future: findAll(),
+        future: _dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
