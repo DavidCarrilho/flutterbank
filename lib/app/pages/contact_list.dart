@@ -2,13 +2,14 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:flutterbank/app/models/models.dart';
+import 'package:flutterbank/db/app_db.dart';
 
 import 'pages.dart';
 
 const _appTitle = 'Contatos';
 
 class ContactList extends StatelessWidget {
-  final List<Contact> contacts = [];
+  // final List<Contact> contacts = [];
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +19,18 @@ class ContactList extends StatelessWidget {
         title: Text(_appTitle),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          final Contact contact = contacts[index];
-          return ContactWidget(contact: contact);
+      body: FutureBuilder(
+        future: findAll(),
+        builder: (context, snapshot) {
+          final List<Contact> contacts = snapshot.data as List<Contact>;
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              final Contact contact = contacts[index];
+              return ContactWidget(contact: contact,);
+            },
+            itemCount: contacts.length,
+          );
         },
-        itemCount: contacts.length,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -38,7 +44,7 @@ class ContactList extends StatelessWidget {
                 (newContact) => developer.log(newContact.toString()),
               );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
