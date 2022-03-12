@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbank/app/components/components.dart';
 
 import '../design_system/colors/colors.dart';
 import 'pages.dart';
-import 'dart:developer' as developer;
 
 const _appTitle = 'Trnsferências';
 
@@ -52,18 +52,19 @@ class DashboardPage extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               children: <Widget>[
                 const SizedBox(width: 8.0),
-                _FeatureItemWidget(
+                FeatureItemWidget(
                   name: 'Transferência',
                   icon: Icons.monetization_on,
-                  onClick: () => _showContactsList(context),
+                  onClick: () =>
+                      _navigation(context: context, page: ContactList()),
                 ),
                 const SizedBox(width: 8.0),
-                _FeatureItemWidget(
-                    name: 'Histórico',
-                    icon: Icons.description,
-                    onClick: () => developer.log(
-                          'Historico',
-                        )),
+                FeatureItemWidget(
+                  name: 'Histórico',
+                  icon: Icons.description,
+                  onClick: () =>
+                      _navigation(context: context, page: TransactionsList()),
+                ),
                 const SizedBox(width: 8.0),
               ],
             ),
@@ -74,50 +75,10 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
-void _showContactsList(BuildContext context) {
+void _navigation({BuildContext context, Widget page}) {
   Navigator.of(context).push(
     MaterialPageRoute(
-      builder: (context) => ContactList(),
+      builder: (context) => page,
     ),
   );
-}
-
-class _FeatureItemWidget extends StatelessWidget {
-  final String name;
-  final IconData icon;
-  final Function onClick;
-  const _FeatureItemWidget({
-    Key key,
-    this.name,
-    this.icon,
-    @required this.onClick,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Material(
-        color: Theme.of(context).primaryColor,
-        child: InkWell(
-          onTap: onClick,
-          child: Container(
-            width: 120.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(icon, size: 30.0, color: kColorNeutralPurple),
-                const SizedBox(height: 12.0),
-                Text(
-                  name,
-                  style: TextStyle(color: kColorNeutralPurple),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
