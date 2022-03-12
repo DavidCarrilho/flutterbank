@@ -5,7 +5,7 @@ import '../design_system/colors/colors.dart';
 import '../models/models.dart';
 import 'pages.dart';
 
-const _appTitle = 'Contatos';
+const _appTitle = 'Transferência';
 
 class ContactList extends StatefulWidget {
   @override
