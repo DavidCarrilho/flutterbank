@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../design_system/colors/colors.dart';
 import 'pages.dart';
+import 'dart:developer' as developer;
 
 const _appTitle = 'Trnsferências';
 
@@ -50,21 +51,19 @@ class DashboardPage extends StatelessWidget {
                 _FeatureItemWidget(
                   name: 'Transferência',
                   icon: Icons.monetization_on,
-                  onClick: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ContactList(),
-                        ),
-                      ),
+                  onClick: () => _showContactsList(context),
                 ),
                 const SizedBox(width: 8.0),
                 _FeatureItemWidget(
                   name: 'Histórico',
                   icon: Icons.description,
-                  onClick: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ContactList(),
-                        ),
-                      ),
+                  onClick: () => developer.log('Historico')
+                ),
+                const SizedBox(width: 8.0),
+                _FeatureItemWidget(
+                  name: 'Histórico',
+                  icon: Icons.description,
+                  onClick: () => developer.log('Historico')
                 ),
               ],
             )
@@ -75,6 +74,14 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
+void _showContactsList(BuildContext context) {
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => ContactList(),
+    ),
+  );
+}
+
 class _FeatureItemWidget extends StatelessWidget {
   final String name;
   final IconData icon;
@@ -83,7 +90,7 @@ class _FeatureItemWidget extends StatelessWidget {
     Key key,
     this.name,
     this.icon,
-    this.onClick,
+    @required this.onClick,
   }) : super(key: key);
 
   @override
