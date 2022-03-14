@@ -10,7 +10,8 @@ class FeatureItemWidget extends StatelessWidget {
     this.name,
     this.icon,
     @required this.onClick,
-  }) : super(key: key);
+  })  : assert(icon != null),
+        assert(onClick != null);
 
   @override
   Widget build(BuildContext context) {

@@ -6,15 +6,17 @@ class TransactionsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    transactions.add(Transaction(
-      accountNumber: 111,
-      contact: Contact(
-        name: 'David',
-        accountNumber: 111,
-        id: 1,
-      ),
-      value: 100,
-    ));
+    // transactions.add(
+    //   Transaction(
+    //     accountNumber: 111,
+    //     contact: Contact(
+    //       name: 'David',
+    //       accountNumber: 111,
+    //       id: 1,
+    //     ),
+    //     value: 100,
+    //   ),
+    // );
     return Scaffold(
       appBar: AppBar(
         title: Text('Transactions'),
