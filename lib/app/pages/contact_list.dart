@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbank/app/components/components.dart';
 
 import '../../db/dao/contact_dao.dart';
 import '../design_system/colors/colors.dart';
@@ -30,9 +31,7 @@ class _ContactListState extends State<ContactList> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return ProgressWidget();
               break;
             case ConnectionState.active:
               break;
