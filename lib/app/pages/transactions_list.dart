@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbank/app/components/centered_message.dart';
 import 'package:flutterbank/app/components/components.dart';
 import 'package:flutterbank/app/models/models.dart';
 import 'package:flutterbank/http/web_client.dart';
@@ -22,6 +23,7 @@ class TransactionsList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Transactions'),
+        centerTitle: true,
       ),
       body: FutureBuilder<List<Transaction>>(
         future: Future.delayed(Duration(seconds: 2)).then((value) => findAll()),
@@ -36,33 +38,36 @@ class TransactionsList extends StatelessWidget {
               break;
             case ConnectionState.done:
               final List<Transaction> transactions = snapshot.data;
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final Transaction transaction = transactions[index];
-                  return Card(
-                    child: ListTile(
-                      leading: Icon(Icons.monetization_on),
-                      title: Text(
-                        transaction.value.toString(),
-                        style: TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold,
+              if (transactions.isNotEmpty) {
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    final Transaction transaction = transactions[index];
+                    return Card(
+                      child: ListTile(
+                        leading: Icon(Icons.monetization_on),
+                        title: Text(
+                          transaction.value.toString(),
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          transaction.contact.accountNumber.toString(),
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
                         ),
                       ),
-                      subtitle: Text(
-                        transaction.contact.accountNumber.toString(),
-                        style: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                itemCount: transactions.length,
-              );
+                    );
+                  },
+                  itemCount: transactions.length,
+                );
+              }
+              return CenteredMessage(message: 'Erro desconhecido');
               break;
           }
-          return Text('Erro desconhecido');
+          return CenteredMessage(message: 'Erro desconhecido');
         },
       ),
     );
