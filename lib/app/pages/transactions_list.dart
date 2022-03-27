@@ -5,7 +5,6 @@ import 'package:flutterbank/app/models/models.dart';
 import 'package:flutterbank/http/web_client.dart';
 
 class TransactionsList extends StatelessWidget {
-  // final List<Transaction> transactions = [];
 
   @override
   Widget build(BuildContext context) {
