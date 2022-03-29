@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../db/dao/contact_dao.dart';
 import '../components/components.dart';
@@ -9,7 +10,7 @@ const _fullNameFieldLabel = "Nome completo";
 const _fullNameFieldHint = "Nome completo";
 const _numberAccountFieldLabel = "Número da conta";
 const _numberAccountFieldHint = "1234";
-const _confirmationButtonText = "Confirmar";
+const _confirmationButtonText = "Cadastrar";
 
 class ContactForm extends StatefulWidget {
   @override
@@ -17,7 +18,8 @@ class ContactForm extends StatefulWidget {
 }
 
 class _ContactFormState extends State<ContactForm> {
-  final TextEditingController _accountNumberController = TextEditingController();
+  final TextEditingController _accountNumberController =
+      TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final ContactDao _dao = ContactDao();
   @override
@@ -43,20 +45,30 @@ class _ContactFormState extends State<ContactForm> {
               hint: _numberAccountFieldHint,
               icon: Icons.account_balance_wallet,
             ),
-            RaisedButton(
-              onPressed: () {
-                final String name = _nameController.text;
-                final int accountNumer =
-                    int.tryParse(_accountNumberController.text);
-                final Contact newContact = Contact(
-                  id: 0,
-                  name: name,
-                  accountNumber: accountNumer,
-                );
-                _dao.saveContact(contact: newContact)
-                    .then((id) => Navigator.pop(context));
-              },
-              child: Text(_confirmationButtonText),
+            const SizedBox(height: 12.0),
+            Container(
+              width: double.maxFinite,
+              height: 50.0,
+              margin: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: RaisedButton(
+                onPressed: () {
+                  final String name = _nameController.text;
+                  final int accountNumer =
+                      int.tryParse(_accountNumberController.text);
+                  final Contact newContact = Contact(
+                    id: 0,
+                    name: name,
+                    accountNumber: accountNumer,
+                  );
+                  _dao
+                      .saveContact(contact: newContact)
+                      .then((id) => Navigator.pop(context));
+                },
+                child: Text(
+                  _confirmationButtonText,
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              ),
             )
           ],
         ),

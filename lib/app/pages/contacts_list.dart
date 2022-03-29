@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbank/app/components/components.dart';
+import 'package:flutterbank/app/pages/transaction_form.dart';
 
 import '../../db/dao/contact_dao.dart';
 import '../design_system/colors/colors.dart';
@@ -8,12 +9,12 @@ import 'pages.dart';
 
 const _appTitle = 'Transferência';
 
-class ContactList extends StatefulWidget {
+class ContactsList extends StatefulWidget {
   @override
-  _ContactListState createState() => _ContactListState();
+  _ContactsListState createState() => _ContactsListState();
 }
 
-class _ContactListState extends State<ContactList> {
+class _ContactsListState extends State<ContactsList> {
   final ContactDao _dao = ContactDao();
 
   @override
@@ -42,6 +43,11 @@ class _ContactListState extends State<ContactList> {
                 itemBuilder: (context, index) {
                   final Contact contact = contacts[index];
                   return ContactWidget(
+                    onClick: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => TransactionForm(contact),
+                          ),
+                        ),
                     contact: contact,
                   );
                 },
@@ -80,12 +86,15 @@ class _ContactListState extends State<ContactList> {
 
 class ContactWidget extends StatelessWidget {
   final Contact contact;
+  final Function() onClick;
 
-  const ContactWidget({Key key, this.contact}) : super(key: key);
+  const ContactWidget({Key key, this.contact, @required this.onClick})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: onClick,
         title: Text(
           contact.name,
           style: TextStyle(fontSize: 24.0),

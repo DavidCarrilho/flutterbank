@@ -56,7 +56,7 @@ class DashboardPage extends StatelessWidget {
                   name: 'Transferência',
                   icon: Icons.monetization_on,
                   onClick: () =>
-                      _navigation(context: context, page: ContactList()),
+                      _navigation(context: context, page: ContactsList()),
                 ),
                 const SizedBox(width: 8.0),
                 FeatureItemWidget(
