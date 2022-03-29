@@ -43,6 +43,7 @@ class TransactionsList extends StatelessWidget {
                 final List<Transaction> transactions = snapshot.data;
                 if (transactions.isNotEmpty) {
                   return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       final Transaction transaction = transactions[index];
                       return Card(
