@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../http/web_client.dart';
+import '../../http/webclients/transactions_webclient.dart';
 import '../components/centered_message.dart';
 import '../components/components.dart';
 import '../models/models.dart';
 
 class TransactionsList extends StatelessWidget {
+  final TransactionWebClient _webClient = TransactionWebClient();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class TransactionsList extends StatelessWidget {
         centerTitle: true,
       ),
       body: FutureBuilder<List<Transaction>>(
-        future: Future.delayed(Duration(seconds: 2)).then((value) => findAll()),
+        future: Future.delayed(Duration(seconds: 2))
+            .then((value) => _webClient.findAll()),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
