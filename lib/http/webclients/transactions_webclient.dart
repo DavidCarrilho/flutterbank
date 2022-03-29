@@ -7,7 +7,6 @@ import '../../app/models/models.dart';
 import '../web_client.dart';
 
 class TransactionWebClient {
-
   Future<List<Transaction>> findAll() async {
     final Response response =
         await client.get(baseUrl).timeout(Duration(seconds: 5));
@@ -16,8 +15,7 @@ class TransactionWebClient {
   }
 
   Future<Transaction> save(Transaction transaction) async {
-    Map<String, dynamic> transactionMap = _toMap(transaction);
-    final String transactionJson = jsonEncode(transactionMap);
+    final String transactionJson = jsonEncode(transaction.toJson());
     final Response response = await client.post(
       baseUrl,
       headers: {
@@ -33,16 +31,7 @@ class TransactionWebClient {
     final List<dynamic> decodedJson = jsonDecode(response.body);
     final List<Transaction> transactions = [];
     for (Map<String, dynamic> transactionJson in decodedJson) {
-      final Map<String, dynamic> contatcJson = transactionJson['contact'];
-      final Transaction transaction = Transaction(
-        value: transactionJson['value'],
-        contact: Contact(
-          id: 0,
-          name: contatcJson['name'],
-          accountNumber: contatcJson['accountNumber'],
-        ),
-      );
-      transactions.add(transaction);
+      transactions.add(Transaction.fromJson(transactionJson));
     }
     developer.log('decoded json $decodedJson');
     return transactions;
@@ -50,25 +39,6 @@ class TransactionWebClient {
 
   Transaction _toTransaction(Response response) {
     Map<String, dynamic> json = jsonDecode(response.body);
-    final Map<String, dynamic> contatcJson = json['contact'];
-    return Transaction(
-      value: json['value'],
-      contact: Contact(
-        id: 0,
-        name: contatcJson['name'],
-        accountNumber: contatcJson['accountNumber'],
-      ),
-    );
-  }
-
-  Map<String, dynamic> _toMap(Transaction transaction) {
-    final Map<String, dynamic> transactionMap = {
-      'value': transaction.value,
-      'contact': {
-        'name': transaction.contact.name,
-        'accountNumber': transaction.contact.accountNumber,
-      },
-    };
-    return transactionMap;
+    return Transaction.fromJson(json);
   }
 }
