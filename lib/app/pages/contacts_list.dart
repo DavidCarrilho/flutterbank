@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/components/components.dart';
-import 'package:flutterbank/app/pages/transaction_form.dart';
+import '../components/components.dart';
+import 'transaction_form.dart';
 
 import '../../db/dao/contact_dao.dart';
 import '../design_system/colors/colors.dart';

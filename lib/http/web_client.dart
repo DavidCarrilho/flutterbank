@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
-import 'package:flutterbank/app/models/models.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'dart:developer' as developer;
+
+import '../app/models/models.dart';
 
 class LoggingInterceptor implements InterceptorContract {
   @override

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/components/centered_message.dart';
-import 'package:flutterbank/app/components/components.dart';
-import 'package:flutterbank/app/models/models.dart';
-import 'package:flutterbank/http/web_client.dart';
+
+import '../../http/web_client.dart';
+import '../components/centered_message.dart';
+import '../components/components.dart';
+import '../models/models.dart';
 
 class TransactionsList extends StatelessWidget {
 

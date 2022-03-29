@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/models/models.dart';
-import 'package:flutterbank/http/web_client.dart';
+import '../models/models.dart';
+import '../../http/web_client.dart';
 
 class TransactionForm extends StatefulWidget {
   final Contact contact;

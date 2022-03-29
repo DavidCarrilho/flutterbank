@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/design_system/colors/colors.dart';
+
+import '../design_system/colors/colors.dart';
 
 class FeatureItemWidget extends StatelessWidget {
   final String name;

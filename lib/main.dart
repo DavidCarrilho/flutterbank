@@ -1,9 +1,9 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/models/models.dart';
-import 'package:flutterbank/http/web_client.dart';
 
 import 'app/app_widget.dart';
-import 'dart:developer' as developer;
+import 'http/web_client.dart';
 
 void main() {
   runApp(AppWidget());

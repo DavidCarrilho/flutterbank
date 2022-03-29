@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbank/app/components/components.dart';
 
+import '../components/components.dart';
 import '../design_system/colors/colors.dart';
 import 'pages.dart';
 

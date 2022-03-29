@@ -1,4 +1,4 @@
-import 'package:flutterbank/app/models/models.dart';
+import 'models.dart';
 
 class Transaction {
   final int accountNumber;
