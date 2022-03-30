@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbank/app/components/components.dart';
 
 import '../../http/webclients/transactions_webclient.dart';
 import '../models/models.dart';
+import 'dart:developer' as developer;
 
 class TransactionForm extends StatefulWidget {
   final Contact contact;
@@ -69,11 +71,24 @@ class _TransactionFormState extends State<TransactionForm> {
                       value: value,
                       contact: widget.contact,
                     );
-                    _webClient.save(transactionCreated).then((transaction) {
-                      if (transaction != null) {
-                        Navigator.pop(context);
-                      }
-                    });
+
+                    showDialog(
+                      context: context,
+                      builder: (context) => TransactionAuthDialog(
+                            onConfirm: (String password) {
+                              developer.log(password);
+                              _webClient
+                                  .save(
+                                      transaction: transactionCreated,
+                                      password: password)
+                                  .then((transaction) {
+                                if (transaction != null) {
+                                  Navigator.pop(context);
+                                }
+                              });
+                            },
+                          ),
+                    );
                   },
                 ),
               ),
