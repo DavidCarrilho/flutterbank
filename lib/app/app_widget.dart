@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbank/app/components/components.dart';
 
 import 'design_system/colors/colors.dart';
 import 'pages/pages.dart';
@@ -16,7 +17,7 @@ class AppWidget extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: HomePage(),
+      home: TransactionAuthDialog(),
     );
   }
 }
