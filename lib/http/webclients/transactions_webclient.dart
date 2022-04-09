@@ -29,10 +29,10 @@ class TransactionWebClient {
     );
 
     if (response.statusCode == 400) {
-      throw Exception('========= OCORREU UM ERRO AO ENVIAR UMA TRANSFERENCIA ==========');
+      throw Exception('Ocorreu algum erro no envio da trânsferencia.');
     }
     if (response.statusCode == 401) {
-      throw Exception('========= OCORREU UM ERRO NA AUTENTICAÇÃO ==========');
+      throw Exception('Ocorreu algum erro de autenticação.');
     }
     return Transaction.fromJson(jsonDecode(response.body));
   }

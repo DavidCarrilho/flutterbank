@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbank/app/components/components.dart';
+import 'package:flutterbank/app/components/response_dialog.dart';
 
 import '../../http/webclients/transactions_webclient.dart';
 import '../models/models.dart';
@@ -103,10 +104,20 @@ class _TransactionFormState extends State<TransactionForm> {
         .save(transaction: transactionCreated, password: password)
         .then((transaction) {
       if (transaction != null) {
-        Navigator.pop(context);
+        showDialog(
+            context: context,
+            builder: (contextDialog) {
+              return SuccessDialog(
+                  'Ocorreu tudo certo com sua transferência ;)');
+            }).then((value) => Navigator.pop(context));
       }
     }).catchError((e) {
       print(e);
-    });
+      showDialog(
+          context: context,
+          builder: (contextDialog) {
+            return FailureDialog(e.message);
+          });
+    }, test: (e) => e is Exception);
   }
 }
