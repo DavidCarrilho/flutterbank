@@ -33,12 +33,21 @@ class TransactionWebClient {
     if (response.statusCode == 200) {
       return Transaction.fromJson(jsonDecode(response.body));
     }
-    throw HttpExpection(_statusCodeResponses[response.statusCode]);
+    throw HttpExpection(_getMessage(response.statusCode));
+    // throw HttpExpection(_getMessage(500));
+  }
+
+  String _getMessage(int statusCode) {
+    if (_statusCodeResponses.containsKey((statusCode))) {
+      return _statusCodeResponses[statusCode];
+    }
+    return 'Erro desconhecido';
   }
 
   static final Map<int, String> _statusCodeResponses = {
     400: 'Ocorreu algum erro no envio da trânsferencia.',
     401: 'Ocorreu algum erro de autenticação.',
+    409: 'Transação já existe.',
   };
 }
 

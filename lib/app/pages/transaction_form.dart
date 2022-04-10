@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutterbank/app/components/components.dart';
 import 'package:flutterbank/app/components/response_dialog.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../http/webclients/transactions_webclient.dart';
 import '../models/models.dart';
@@ -21,6 +22,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
   final TransactionWebClient _webClient = TransactionWebClient();
+  final String transactionId = Uuid().v4();
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,7 @@ class _TransactionFormState extends State<TransactionForm> {
                   onPressed: () {
                     final double value = double.tryParse(_valueController.text);
                     final transactionCreated = Transaction(
+                      id: transactionId,
                       value: value,
                       contact: widget.contact,
                     );
