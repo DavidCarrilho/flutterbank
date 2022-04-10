@@ -103,36 +103,17 @@ class _TransactionFormState extends State<TransactionForm> {
     BuildContext context,
   ) async {
     // await Future.delayed(Duration(seconds: 1));
-    final Transaction transaction = await _webClient
-        .save(transaction: transactionCreated, password: password)
-        .catchError(
-      (e) {
-        print(e);
-        showDialog(
-          context: context,
-          builder: (contextDialog) => FailureDialog(e.message),
-        );
-      },
-      test: (e) => e is HttpException,
-    ).catchError(
-      (e) {
-        print(e);
-        showDialog(
-          context: context,
-          builder: (contextDialog) => FailureDialog('Erro de timeout'),
-        );
-      },
-      test: (e) => e is TimeoutException,
-    ).catchError(
-      (e) {
-        print(e);
-        showDialog(
-          context: context,
-          builder: (contextDialog) => FailureDialog('Erro desconhecido'),
-        );
-      },
+    Transaction transaction = await _send(
+      transactionCreated,
+      password,
+      context,
     );
 
+    _showSeccessfullMessage(transaction, context);
+  }
+
+  Future _showSeccessfullMessage(
+      Transaction transaction, BuildContext context) async {
     if (transaction != null) {
       await showDialog(
         context: context,
@@ -141,5 +122,38 @@ class _TransactionFormState extends State<TransactionForm> {
       );
       Navigator.pop(context);
     }
+  }
+
+  Future<Transaction> _send(Transaction transactionCreated, String password,
+      BuildContext context) async {
+    final Transaction transaction = await _webClient
+        .save(transaction: transactionCreated, password: password)
+        .catchError(
+      (e) {
+        print(e);
+        _showFailureMessage(context, message: e.message);
+      },
+      test: (e) => e is HttpException,
+    ).catchError(
+      (e) {
+        print(e);
+        _showFailureMessage(context, message: 'Erro de timeout');
+      },
+      test: (e) => e is TimeoutException,
+    ).catchError(
+      (e) {
+        print(e);
+        _showFailureMessage(context);
+      },
+    );
+    return transaction;
+  }
+
+  void _showFailureMessage(BuildContext context,
+      {String message = 'Erro desconhecido'}) {
+    showDialog(
+      context: context,
+      builder: (contextDialog) => FailureDialog('Erro desconhecido'),
+    );
   }
 }
