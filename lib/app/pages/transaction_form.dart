@@ -100,24 +100,21 @@ class _TransactionFormState extends State<TransactionForm> {
     BuildContext context,
   ) async {
     // await Future.delayed(Duration(seconds: 1));
-    _webClient
+    final Transaction transaction = await _webClient
         .save(transaction: transactionCreated, password: password)
-        .then((transaction) {
-      if (transaction != null) {
-        showDialog(
-            context: context,
-            builder: (contextDialog) {
-              return SuccessDialog(
-                  'Ocorreu tudo certo com sua transferência ;)');
-            }).then((value) => Navigator.pop(context));
-      }
-    }).catchError((e) {
+        .catchError((e) {
       print(e);
       showDialog(
           context: context,
-          builder: (contextDialog) {
-            return FailureDialog(e.message);
-          });
+          builder: (contextDialog) => FailureDialog(e.message));
     }, test: (e) => e is Exception);
+
+    if (transaction != null) {
+      await showDialog(
+        context: context,
+        builder: (contextDialog) => SuccessDialog('Ocorreu tudo certo com sua transferência ;)'),
+      );
+      Navigator.pop(context);
+    }
   }
 }
