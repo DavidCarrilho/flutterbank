@@ -37,6 +37,9 @@ class _TransactionFormState extends State<TransactionForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              ProgressWidget(
+                message: 'Enviando...',
+              ),
               Text(
                 widget.contact.name,
                 style: TextStyle(

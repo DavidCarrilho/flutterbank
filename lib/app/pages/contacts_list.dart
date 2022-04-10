@@ -32,7 +32,9 @@ class _ContactsListState extends State<ContactsList> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return ProgressWidget();
+              return ProgressWidget(
+                message: 'Carregando...',
+              );
               break;
             case ConnectionState.active:
               break;
