@@ -23,6 +23,7 @@ class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
   final TransactionWebClient _webClient = TransactionWebClient();
   final String transactionId = Uuid().v4();
+  bool _sending = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +38,11 @@ class _TransactionFormState extends State<TransactionForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ProgressWidget(
-                message: 'Enviando...',
+              Visibility(
+                visible: _sending,
+                child: ProgressWidget(
+                  message: 'Enviando...',
+                ),
               ),
               Text(
                 widget.contact.name,
@@ -109,12 +113,12 @@ class _TransactionFormState extends State<TransactionForm> {
     BuildContext context,
   ) async {
     // await Future.delayed(Duration(seconds: 1));
+
     Transaction transaction = await _send(
       transactionCreated,
       password,
       context,
     );
-
     _showSeccessfullMessage(transaction, context);
   }
 
@@ -132,6 +136,9 @@ class _TransactionFormState extends State<TransactionForm> {
 
   Future<Transaction> _send(Transaction transactionCreated, String password,
       BuildContext context) async {
+    setState(() {
+      _sending = true;
+    });
     final Transaction transaction = await _webClient
         .save(transaction: transactionCreated, password: password)
         .catchError(
@@ -151,7 +158,11 @@ class _TransactionFormState extends State<TransactionForm> {
         print(e);
         _showFailureMessage(context);
       },
-    );
+    ).whenComplete(() {
+      setState(() {
+        _sending = false;
+      });
+    });
     return transaction;
   }
 
