@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutterbank/app/components/components.dart';
 import 'package:flutterbank/app/components/response_dialog.dart';
@@ -102,17 +105,29 @@ class _TransactionFormState extends State<TransactionForm> {
     // await Future.delayed(Duration(seconds: 1));
     final Transaction transaction = await _webClient
         .save(transaction: transactionCreated, password: password)
-        .catchError((e) {
-      print(e);
-      showDialog(
-          context: context,
-          builder: (contextDialog) => FailureDialog(e.message));
-    }, test: (e) => e is Exception);
+        .catchError(
+      (e) {
+        print(e);
+        showDialog(
+            context: context,
+            builder: (contextDialog) => FailureDialog(e.message));
+      },
+      test: (e) => e is HttpException,
+    ).catchError(
+      (e) {
+        print(e);
+        showDialog(
+            context: context,
+            builder: (contextDialog) => FailureDialog('Erro de Timeout'));
+      },
+      test: (e) => e is TimeoutException,
+    );
 
     if (transaction != null) {
       await showDialog(
         context: context,
-        builder: (contextDialog) => SuccessDialog('Ocorreu tudo certo com sua transferência ;)'),
+        builder: (contextDialog) =>
+            SuccessDialog('Ocorreu tudo certo com sua transferência ;)'),
       );
       Navigator.pop(context);
     }
