@@ -7,7 +7,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'flutterbank',
+      title: 'Flutterbank',
       theme: ThemeData(
         primaryColor: kColorPurple,
         accentColor: kColorAccentPurple,

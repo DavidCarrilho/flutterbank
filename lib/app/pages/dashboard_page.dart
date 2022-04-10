@@ -23,13 +23,13 @@ class DashboardPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.all(8.0),
-            padding: EdgeInsets.symmetric(vertical: 30.0),
+            margin: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 30.0),
             width: double.infinity,
             color: kColorNeutralPurple,
             child: Column(
               children: <Widget>[
-                FlutterLogo(
+                const FlutterLogo(
                   size: 180.0,
                   colors: Colors.deepPurple,
                 ),
