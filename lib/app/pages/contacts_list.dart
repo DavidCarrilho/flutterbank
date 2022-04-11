@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../components/components.dart';
-import 'transaction_form.dart';
 
 import '../../db/dao/contact_dao.dart';
+import '../components/components.dart';
 import '../design_system/colors/colors.dart';
 import '../models/models.dart';
 import 'pages.dart';
+import 'transaction_form.dart';
 
 const _appTitle = 'Transferência';
 
