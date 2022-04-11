@@ -31,7 +31,8 @@ class DashboardPage extends StatelessWidget {
               children: <Widget>[
                 const FlutterLogo(
                   size: 180.0,
-                  colors: Colors.deepPurple,
+                  // colors: Colors.deepPurple,
+                  // style: FlutterLogoStyle,
                 ),
                 const SizedBox(height: 20.0),
                 Text(
